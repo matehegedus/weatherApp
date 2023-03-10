@@ -1,0 +1,144 @@
+body{ 
+  background-color: #bdbdbd;
+  font-family: "Josefin Sans";
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+body.dark{
+  background-color: #505050
+}
+
+.card{
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+  background-color: rgb(160, 160, 160);
+  border-radius: 20px;
+  border: solid #fcfcfc;
+  border-width: 0px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 5px 5px 30px #1f1f1f55;
+}
+
+
+.dark .card{
+  background-color: #505050;
+  color: white;
+}
+
+.card.content{
+  flex-direction: row;
+}
+
+
+@media (max-width: 1024px){
+  .card.content{
+    flex-direction: column;
+  }
+}
+
+.active{
+  border-width: 1px;
+}
+
+.search{
+  display: flex;
+  flex-basis: 55%;
+  margin-right: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.info{
+  margin-top: 10px;
+  margin-right: 10px;
+  padding: 5px;
+  flex-grow: 1;
+}
+
+.overview{
+  justify-content: center;
+  margin: 10px;
+  text-align: center;
+}
+
+.currentWeather{
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px;
+}
+
+.detail{
+  display: flex;
+  margin-left: 5px;
+}
+
+.forecast{
+  flex-direction: row;
+  justify-content: center;
+  flex-flow:wrap;
+}
+
+.forecast-container{
+  display: flex;
+  align-items: center;
+}
+
+.weather-title{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.weather-description{
+  text-transform: uppercase;
+  font-size: small;
+  color: white;
+}
+.dark .weather-description {
+  color:black
+}
+
+.separator{
+  width: 10px;
+  height: 80%;
+  border-left: 1px solid rgb(228, 226, 226);
+}
+
+.settings{
+  display: flex;
+  justify-content: space-between; 
+  margin-bottom: 10px;
+}
+
+.settings-darkmode{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-content: stretch;
+  gap: 10px;
+}
+
+.detail-name{
+  color: black;
+}
+.dark .detail-name{
+  color: white;
+}
+
+.detail-value{
+  margin-left: 5px;
+  color: rgb(228, 226, 226);
+}
+
+.degree{
+  color: rgb(9, 95, 98);
+  font-weight: bold;
+  font-size: large;
+}
+.dark .degree{
+  color: rgb(158,228,230);
+}
