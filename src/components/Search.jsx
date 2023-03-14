@@ -2,11 +2,14 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setLocation } from "../redux/apiLocation";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 export default function Search() {
   const { place } = useSelector((state) => state.place);
+  const { cities } = useSelector((state) => state.cities);
   const { weatherInfo } = useSelector((state) => state.weatherInfo);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const { t, i18n } = useTranslation();
 
@@ -32,14 +35,8 @@ export default function Search() {
     Snow: "https://media.tenor.com/fwEQI4qR7aEAAAAC/snowfall-primal-survivor.gif",
   };
 
-  return (
-    <div
-      style={{
-        backgroundImage: `url(${bg[weatherType]})`,
-        backgroundSize: "cover",
-      }}
-      className="search"
-    >
+  const getSearch = () => {
+    return (
       <form>
         <label>
           {t("Current city") + ":"}
@@ -63,6 +60,42 @@ export default function Search() {
           {t("Search")}
         </button>
       </form>
+    );
+  };
+
+  const getList = () => {
+    return (
+      <div>
+        <select
+          value={cities.includes(place) ? place : "default"}
+          className="btn btn-info"
+          onChange={(e) => {
+            dispatch(setLocation(e.target.value));
+            navigate(`/${e.target.value}`);
+          }}
+        >
+          <option value="default" disabled hidden>
+            Select a city...
+          </option>
+          {cities.map((city) => (
+            <option key={city} value={city}>
+              {city}
+            </option>
+          ))}
+        </select>
+      </div>
+    );
+  };
+
+  return (
+    <div
+      style={{
+        backgroundImage: `url(${bg[weatherType]})`,
+        backgroundSize: "cover",
+      }}
+      className="search"
+    >
+      {getList()}
     </div>
   );
 }

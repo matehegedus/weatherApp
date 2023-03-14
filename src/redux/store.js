@@ -4,6 +4,7 @@ import temperatureReducer from "./temperature";
 import languageReducer from "./language";
 import apiWeatherReducer from "./apiWeather";
 import apiLocationReducer from "./apiLocation";
+import citiesReducer from "./cities";
 
 export default configureStore({
   reducer: {
@@ -12,5 +13,6 @@ export default configureStore({
     language: languageReducer,
     weatherInfo: apiWeatherReducer,
     place: apiLocationReducer,
+    cities: citiesReducer,
   },
 });

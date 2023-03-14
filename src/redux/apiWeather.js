@@ -14,21 +14,25 @@ export const apiWeatherSlice = createSlice({
   name: "weather",
   initialState: {
     weatherInfo: [],
+    requestId: "",
   },
   reducers: {},
-  extraReducers: {
-    [fetchWeather.fulfilled]: (state, action) => {
-      console.log("fetched");
-      state.weatherInfo = action.payload.list.slice(0, forecastCnt);
-    },
-    [fetchWeather.pending]: (state) => {
-      console.log("pending");
-    },
-    [fetchWeather.rejected]: (state) => {
-      console.log("rejected :>> ", state);
-      alert("Could not fetch weather data");
-      state.weatherInfo = undefined;
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchWeather.fulfilled, (state, action) => {
+        if (state.requestId !== action.meta.requestId) return;
+
+        state.weatherInfo = action.payload.list.slice(0, forecastCnt);
+      })
+      .addCase(fetchWeather.pending, (state, action) => {
+        if (state.requestId !== action.meta.requestId) {
+          state.requestId = action.meta.requestId;
+        }
+      })
+      .addCase(fetchWeather.rejected, (state) => {
+        alert("Could not fetch weather data");
+        state.weatherInfo = undefined;
+      });
   },
 });
 

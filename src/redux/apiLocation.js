@@ -18,13 +18,14 @@ export const apiLocationSlice = createSlice({
       state.place = action.payload;
     },
   },
-  extraReducers: {
-    [fetchLocation.fulfilled]: (state, action) => {
-      state.place = action.payload.address.country;
-    },
-    [fetchLocation.rejected]: (state) => {
-      alert("Could not fetch location");
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchLocation.fulfilled, (state, action) => {
+        state.place = action.payload.address.country;
+      })
+      .addCase(fetchLocation.rejected, (state) => {
+        alert("Could not fetch location");
+      });
   },
 });
 
